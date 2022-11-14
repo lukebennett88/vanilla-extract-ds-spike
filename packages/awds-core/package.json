@@ -1,0 +1,50 @@
+{
+	"name": "@awds/core",
+	"version": "0.0.0",
+	"license": "MIT",
+	"sideEffects": [
+		"*.css"
+	],
+	"exports": {
+		".": {
+			"module": "./dist/index.mjs",
+			"default": "./dist/index.js"
+		},
+		"./index.css": "./dist/index.css",
+		"./package.json": "./package.json"
+	},
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
+	"files": [
+		"dist/**"
+	],
+	"scripts": {
+		"build": "tsup src/index.tsx --format esm,cjs --dts --external react",
+		"build:css": "tailwindcss -m -i ./src/tailwind.css -o dist/index.css",
+		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+		"dev": "concurrently \"npm run dev:css\" \"npm run dev:package\"",
+		"dev:css": "tailwindcss -w -i ./src/tailwind.css -o dist/index.css",
+		"dev:package": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
+		"lint": "TIMING=1 eslint \"src/**/*.ts*\""
+	},
+	"dependencies": {
+		"@react-aria/button": "^3.6.2",
+		"@react-aria/utils": "^3.14.0",
+		"class-variance-authority": "^0.3.0"
+	},
+	"devDependencies": {
+		"@awds/tsconfig": "0.0.0",
+		"@types/react": "18.0.25",
+		"@types/react-dom": "18.0.8",
+		"concurrently": "^7.5.0",
+		"eslint": "8.27.0",
+		"eslint-config-awds": "0.0.0",
+		"react": "18.2.0",
+		"tsup": "6.4.0",
+		"typescript": "4.8.4"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}

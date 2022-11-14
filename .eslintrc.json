@@ -1,0 +1,9 @@
+{
+	"root": true,
+	"extends": ["awds"],
+	"settings": {
+		"next": {
+			"rootDir": ["apps/*/"]
+		}
+	}
+}
