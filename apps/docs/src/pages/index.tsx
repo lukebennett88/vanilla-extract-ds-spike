@@ -1,4 +1,4 @@
-import { Button } from 'vanilla-extract-react-spike';
+import { Button } from '@awds/core';
 
 export default function Docs() {
 	return (

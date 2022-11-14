@@ -21,7 +21,7 @@ importers:
 
   apps/docs:
     specifiers:
-      'vanilla-extract-react-spike': 0.0.0
+      '@awds/core': 0.0.0
       '@awds/tsconfig': 0.0.0
       '@awds/utils': 0.0.0
       '@types/node': 18.11.9
@@ -35,7 +35,7 @@ importers:
       react-dom: 18.2.0
       typescript: 4.8.4
     dependencies:
-      'vanilla-extract-react-spike': link:../../packages/awds-core
+      '@awds/core': link:../../packages/awds-core
       '@awds/utils': link:../../packages/awds-utils
       eslint: 8.27.0
       eslint-config-next: 13.0.3_rmayb2veg2btbq6mbmnyivgasy

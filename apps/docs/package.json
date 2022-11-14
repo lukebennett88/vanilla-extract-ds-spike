@@ -10,7 +10,7 @@
 		"start": "next start"
 	},
 	"dependencies": {
-		"vanilla-extract-react-spike": "0.0.0",
+		"@awds/core": "0.0.0",
 		"@awds/utils": "0.0.0",
 		"eslint": "8.27.0",
 		"eslint-config-next": "13.0.3",
