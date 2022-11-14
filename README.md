@@ -13,7 +13,7 @@ This Turborepo includes the following:
 
 - `docs`: A placeholder documentation site powered by
   [Next.js](https://nextjs.org/)
-- `@awds/core`: core React components
+- `vanilla-extract-react-spike`: core React components
 - `@awds/utils`: shared React utilities
 - `@awds/tsconfig`: shared `tsconfig.json`s used throughout the monorepo
 - `eslint-config-awds`: ESLint preset
