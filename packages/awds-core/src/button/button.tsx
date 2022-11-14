@@ -1,6 +1,6 @@
 import { useButton as useAriaButton } from '@react-aria/button';
 import { mergeRefs } from '@react-aria/utils';
-import { cx } from 'class-variance-authority';
+import { clsx } from 'clsx';
 import { forwardRef, useRef } from 'react';
 import { componentStyles } from '../styles';
 
@@ -52,7 +52,7 @@ export function useButton(
 			 * manually pass through what we want here for now.
 			 */
 			'children': props.children,
-			'className': cx(
+			'className': clsx(
 				buttonStyles.root,
 				buttonStyles.size[props.size],
 				props.className
