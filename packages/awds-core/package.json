@@ -3,14 +3,17 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"sideEffects": [
-		"*.css"
+		"*.css.ts"
 	],
 	"exports": {
 		".": {
-			"module": "./dist/index.mjs",
+			"module": "./dist/index.js",
 			"default": "./dist/index.js"
 		},
-		"./index.css": "./dist/index.css",
+		"./styles": {
+			"import": "./dist/index.css",
+			"require": "./dist/index.css"
+		},
 		"./package.json": "./package.json"
 	},
 	"main": "./dist/index.js",
@@ -20,29 +23,31 @@
 		"dist/**"
 	],
 	"scripts": {
-		"build": "tsup src/index.tsx --format esm,cjs --dts --external react",
-		"build:css": "tailwindcss -m -i ./src/tailwind.css -o dist/index.css",
+		"build": "tsup",
 		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
-		"dev": "concurrently \"npm run dev:css\" \"npm run dev:package\"",
-		"dev:css": "tailwindcss -w -i ./src/tailwind.css -o dist/index.css",
-		"dev:package": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
+		"dev": "tsup --watch",
 		"lint": "TIMING=1 eslint \"src/**/*.ts*\""
 	},
 	"dependencies": {
 		"@react-aria/button": "^3.6.2",
 		"@react-aria/utils": "^3.14.0",
+		"@vanilla-extract/css": "^1.9.1",
+		"@vanilla-extract/esbuild-plugin": "^2.2.0",
+		"@vanilla-extract/sprinkles": "^1.5.0",
 		"class-variance-authority": "^0.3.0"
 	},
 	"devDependencies": {
 		"@awds/tsconfig": "0.0.0",
 		"@types/react": "18.0.25",
 		"@types/react-dom": "18.0.8",
-		"concurrently": "^7.5.0",
 		"eslint": "8.27.0",
 		"eslint-config-awds": "0.0.0",
 		"react": "18.2.0",
 		"tsup": "6.4.0",
 		"typescript": "4.8.4"
+	},
+	"peerDependencies": {
+		"react": "18.2.0"
 	},
 	"publishConfig": {
 		"access": "public"

@@ -1,7 +1,8 @@
 import { useButton as useAriaButton } from '@react-aria/button';
 import { mergeRefs } from '@react-aria/utils';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cx } from 'class-variance-authority';
 import { forwardRef, useRef } from 'react';
+import { componentStyles } from '../styles';
 
 ////////////////////////////////////////////////////////////////////////////////
 /**
@@ -21,6 +22,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 ////////////////////////////////////////////////////////////////////////////////
+
+const buttonStyles = componentStyles.Button;
 
 /**
  * useButton
@@ -49,7 +52,11 @@ export function useButton(
 			 * manually pass through what we want here for now.
 			 */
 			'children': props.children,
-			'className': getButtonStyles({ ...props, className: props.className }),
+			'className': cx(
+				buttonStyles.root,
+				buttonStyles.size[props.size],
+				props.className
+			),
 			'style': props.style,
 			...buttonProps,
 		},
@@ -59,59 +66,13 @@ export function useButton(
 ////////////////////////////////////////////////////////////////////////////////
 
 /**
- * getButtonStyles
- *
- * @description
- */
-
-export const getButtonStyles = cva(
-	['border cursor-default font-medium inline-flex items-center rounded-full'],
-	{
-		variants: {
-			prominence: {
-				high: [
-					'bg-skin-button-muted border-transparent text-skin-base',
-					'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-skin-button-accent',
-					'hover:bg-skin-fill',
-				],
-				low: [
-					'bg-skin-button-accent border-transparent text-skin-inverted',
-					'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-skin-button-accent',
-					'hover:bg-skin-button-accent-hover',
-				],
-			},
-			/**
-			 * We would need to use compoundVariants for to style with both tone
-			 * and prominence.
-			 */
-			// tone: {
-			// 	positive: [''],
-			// 	critical: [''],
-			// 	caution: [''],
-			// 	info: [''],
-			// },
-			size: {
-				small: ['px-4 h-8 text-sm'],
-				regular: ['px-6 h-12 text-base'],
-			},
-		},
-		defaultVariants: {
-			prominence: 'high',
-			size: 'regular',
-			// tone: 'positive',
-		},
-	}
-);
-
-////////////////////////////////////////////////////////////////////////////////
-
-/**
  * Types
  */
 
 export type NativeButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
-export type ButtonVariantProps = VariantProps<typeof getButtonStyles>;
-export type ButtonProps = NativeButtonProps & ButtonVariantProps;
+export type ButtonProps = NativeButtonProps & {
+	size: keyof typeof buttonStyles.size;
+};
 export type UseButtonReturn = {
 	buttonProps: NativeButtonProps;
 };
